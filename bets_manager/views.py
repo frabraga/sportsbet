@@ -22,11 +22,13 @@ def index(request):
             return HttpResponseRedirect('/')
 
         bets = SingleBet.objects.filter(user=request.user)
+
         context = {
             'bets': bets,
             'events': events_choices,
             'result': result_choices,
-            'sum_amount_won': sum_amount_won(request.user)
+            'sum_amount_won': sum_amount_won(request.user),
+            'header': ['Date', 'Match', 'Event', 'Odds', 'Units', 'Detail', 'Result'],
         }
 
         return render(request, 'bets_manager/index.html', context)

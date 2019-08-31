@@ -69,17 +69,44 @@
         </div>
       </section>
 
-      <div class="container">
-      {% for bet in bets %}
-        <p class="text-center">
-            Date: {{ bet.date }} - Match: {{ bet.match }} - Units: {{ bet.units }} - Event: {{ bet.event }} - Odds: {{ bet.odds_in_decial }} - Result: {{ bet.result }}
-        </p>
-      {% endfor %}
-      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            {% for k in header %}
+              <th>{{k}}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for bet in bets %}
+            <tr>
+              <td>{{bet.date}}</td>
+              <td>{{bet.match}}</td>
+              <td>{{bet.event}}</td>
+              <td>{{bet.odds_in_decimal}}</td>
+              <td>{{bet.units}}</td>
+              <td>{{bet.detail}}</td>
+              <td
+                {% if bet.result == 'won' %}
+                  style="background: #26a17f"
+                {% elif  bet.result == 'won_half' %}
+                  style="background: #3ce0af"
+                {% elif  bet.result == 'lost' %}
+                  style="background: #a41515"
+                {% elif  bet.result == 'lost_half' %}
+                  style="background: #993333"
+                {% endif %}
+              >{{bet.result}}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
 
-      <div class="container" style="background: #1ba87e">
-        {{ sum_amount_won }}
-      </div>
+      <table class="table">
+        <tr>
+            <th>Total: {{ sum_amount_won }} units</th>
+        </tr>
+      </table>
 {% endif %}
 
   <!-- Alerts -->
