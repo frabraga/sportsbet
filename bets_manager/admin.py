@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+from bets_manager.models import SingleBet
+
+admin.site.register(SingleBet)
