@@ -21,6 +21,7 @@ class SingleBet(models.Model):
     )
     event = fields.EventField()
     result = fields.ResultField()
+    detail = models.CharField(max_length=255)
 
     @property
     def amount_won(self):
@@ -37,3 +38,12 @@ class SingleBet(models.Model):
 
     def __str__(self):
         return '{} - {}'.format(self.match, self.result)
+
+
+def sum_amount_won(user):
+    single_bets = SingleBet.objects.filter(user=user)
+    amounts_won = []
+    for bet in single_bets:
+        amounts_won.append(bet.amount_won)
+
+    return sum(amounts_won)
