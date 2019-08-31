@@ -4,5 +4,5 @@ from bets_manager import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('/about', views.index, name='about'),
+    path('about', views.index, name='about'),
 ]
